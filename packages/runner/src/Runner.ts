@@ -205,7 +205,8 @@ export class Runner
      * @method dispatch
      * @see PIXI.Runner#emit
      */
-    public get run() {
+    public get run()
+    {
         return Runner.prototype.emit;
     }
 
@@ -214,7 +215,8 @@ export class Runner
      * @method run
      * @see PIXI.Runner#emit
      */
-    public get dispatch() {
+    public get dispatch()
+    {
         return Runner.prototype.emit;
     }
 }

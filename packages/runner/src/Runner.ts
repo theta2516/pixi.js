@@ -199,21 +199,22 @@ export class Runner
     {
         return this._name;
     }
-}
 
-Object.defineProperties(Runner.prototype, {
     /**
      * Alias for `emit`
-     * @memberof PIXI.Runner#
      * @method dispatch
      * @see PIXI.Runner#emit
      */
-    dispatch: { value: Runner.prototype.emit },
+    public get run() {
+        return Runner.prototype.emit;
+    }
+
     /**
      * Alias for `emit`
-     * @memberof PIXI.Runner#
      * @method run
      * @see PIXI.Runner#emit
      */
-    run: { value: Runner.prototype.emit },
-});
+    public get dispatch() {
+        return Runner.prototype.emit;
+    }
+}

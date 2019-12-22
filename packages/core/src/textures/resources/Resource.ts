@@ -1,5 +1,9 @@
 import { Runner } from '@pixi/runner';
 
+import { BaseTexture } from '../BaseTexture';
+import { Renderer } from '../../Renderer';
+import { GLTexture } from '../GLTexture';
+
 /**
  * Base resource class for textures that manages validation and uploading, depending on its type.
  *
@@ -10,6 +14,14 @@ import { Runner } from '@pixi/runner';
  */
 export class Resource
 {
+    protected _width: number;
+    protected _height: number;
+    // readonly?
+    destroyed: boolean;
+    protected internal: boolean;
+    protected onResize: Runner;
+    protected onUpdate: Runner;
+    protected onError: Runner;
     /**
      * @param {number} [width=0] Width of the resource
      * @param {number} [height=0] Height of the resource
@@ -50,11 +62,12 @@ export class Resource
 
         /**
          * Mini-runner for handling resize events
+         * accepts 2 parameters: width, height
          *
          * @member {Runner}
          * @private
          */
-        this.onResize = new Runner('setRealSize', 2);
+        this.onResize = new Runner('setRealSize');
 
         /**
          * Mini-runner for handling update events
@@ -66,11 +79,12 @@ export class Resource
 
         /**
          * Handle internal errors, such as loading errors
+         * accepts 1 param: error
          *
          * @member {Runner}
          * @private
          */
-        this.onError = new Runner('onError', 1);
+        this.onError = new Runner('onError');
     }
 
     /**
@@ -78,7 +92,7 @@ export class Resource
      *
      * @param {PIXI.BaseTexture} baseTexture - Parent texture
      */
-    bind(baseTexture)
+    bind(baseTexture: BaseTexture)
     {
         this.onResize.add(baseTexture);
         this.onUpdate.add(baseTexture);
@@ -97,7 +111,7 @@ export class Resource
      *
      * @param {PIXI.BaseTexture} baseTexture - Parent texture
      */
-    unbind(baseTexture)
+    unbind(baseTexture: BaseTexture)
     {
         this.onResize.remove(baseTexture);
         this.onUpdate.remove(baseTexture);
@@ -109,13 +123,13 @@ export class Resource
      * @param {number} width X dimension
      * @param {number} height Y dimension
      */
-    resize(width, height)
+    resize(width: number, height: number)
     {
         if (width !== this._width || height !== this._height)
         {
             this._width = width;
             this._height = height;
-            this.onResize.run(width, height);
+            this.onResize.emit(width, height);
         }
     }
 
@@ -136,7 +150,7 @@ export class Resource
     {
         if (!this.destroyed)
         {
-            this.onUpdate.run();
+            this.onUpdate.emit();
         }
     }
 
@@ -181,7 +195,8 @@ export class Resource
      * @param {PIXI.GLTexture} glTexture - texture instance for this webgl context
      * @returns {boolean} true is success
      */
-    upload(renderer, baseTexture, glTexture) // eslint-disable-line no-unused-vars
+    // @ts-ignore
+    upload(renderer: Renderer, baseTexture: BaseTexture, glTexture: GLTexture) // eslint-disable-line no-unused-vars
     {
         return false;
     }
@@ -194,7 +209,8 @@ export class Resource
      * @param {PIXI.GLTexture} glTexture - texture instance for this webgl context
      * @returns {boolean} `true` is success
      */
-    style(renderer, baseTexture, glTexture) // eslint-disable-line no-unused-vars
+    // @ts-ignore
+    style(renderer: Renderer, baseTexture: BaseTexture, glTexture: GLTexture) // eslint-disable-line no-unused-vars
     {
         return false;
     }

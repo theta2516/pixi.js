@@ -33,6 +33,8 @@ import { Runner } from '@pixi/runner';
  */
 export class Renderer extends AbstractRenderer
 {
+    gl: WebGL2RenderingContext;
+
     /**
      * Create renderer if WebGL is available. Overrideable
      * by the **@pixi/canvas-renderer** package to allow fallback.
@@ -40,7 +42,7 @@ export class Renderer extends AbstractRenderer
      * @static
      * @private
      */
-    static create(options)
+    static create(options: any)
     {
         if (isWebGLSupported())
         {

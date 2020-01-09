@@ -1,4 +1,5 @@
 import { BaseTexture } from './BaseTexture';
+import { Resource } from './resources/Resource';
 import { CubeResource } from './resources/CubeResource';
 
 /**
@@ -19,7 +20,7 @@ export class CubeTexture extends BaseTexture
      *        on the options available to each resource.
      * @returns {PIXI.CubeTexture} new cube texture
      */
-    static from(resources, options)
+    static from(resources: Array<string|Resource>, options?: any)
     {
         return new CubeTexture(new CubeResource(resources, options));
     }

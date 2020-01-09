@@ -195,6 +195,7 @@ export class Resource
      * @param {PIXI.GLTexture} glTexture - texture instance for this webgl context
      * @returns {boolean} true is success
      */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     upload(renderer: Renderer, baseTexture: BaseTexture, glTexture: GLTexture) // eslint-disable-line no-unused-vars
     {
@@ -209,6 +210,7 @@ export class Resource
      * @param {PIXI.GLTexture} glTexture - texture instance for this webgl context
      * @returns {boolean} `true` is success
      */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     style(renderer: Renderer, baseTexture: BaseTexture, glTexture: GLTexture) // eslint-disable-line no-unused-vars
     {

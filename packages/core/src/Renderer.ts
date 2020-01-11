@@ -34,6 +34,8 @@ import { Runner } from '@pixi/runner';
 export class Renderer extends AbstractRenderer
 {
     gl: WebGL2RenderingContext;
+    globalUniforms: UniformGroup;
+    CONTEXT_UID: number;
 
     /**
      * Create renderer if WebGL is available. Overrideable

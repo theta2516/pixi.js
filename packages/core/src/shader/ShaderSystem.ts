@@ -27,7 +27,7 @@ export class ShaderSystem extends System
     gl: WebGL2RenderingContext;
     shader: Shader;
     program: Program;
-    cache: { [key: string]: any };
+    cache: { [key: string]: Function };
     id: number;
     destroyed: boolean = false;
     /**
@@ -131,9 +131,9 @@ export class ShaderSystem extends System
      *
      * syncs uniforms on the group
      * @param {*} group the uniform group to sync
-     * @param {*} syncData this is data that is passed to the sync function and any nested sync functions
+     * @param {*} [syncData] this is data that is passed to the sync function and any nested sync functions
      */
-    syncUniformGroup(group: UniformGroup, syncData: any)
+    syncUniformGroup(group: UniformGroup, syncData?: any)
     {
         const glProgram = this.getglProgram();
 

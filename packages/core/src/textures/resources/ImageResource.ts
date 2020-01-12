@@ -36,7 +36,7 @@ export class ImageResource extends BaseImageResource
      * @param {boolean} [options.crossorigin=true] - Load image using cross origin
      * @param {PIXI.ALPHA_MODES} [options.alphaMode=PIXI.ALPHA_MODES.UNPACK] - Premultiply image alpha in bitmap
      */
-    constructor(source: HTMLImageElement|string, options: IImageResourceOptions)
+    constructor(source: HTMLImageElement|string, options?: IImageResourceOptions)
     {
         options = options || {};
 

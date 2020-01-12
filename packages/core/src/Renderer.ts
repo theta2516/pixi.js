@@ -37,6 +37,24 @@ export class Renderer extends AbstractRenderer
     globalUniforms: UniformGroup;
     CONTEXT_UID: number;
 
+    //systems
+    mask: MaskSystem;
+    context: ContextSystem;
+    state: StateSystem;
+    shader: ShaderSystem;
+    texture: TextureSystem;
+    geometry: GeometrySystem;
+    framebuffer: FramebufferSystem;
+    scissor: ScissorSystem;
+    stencil: StencilSystem;
+    projection: ProjectionSystem;
+    textureGC: TextureGCSystem;
+    filter: FilterSystem;
+    renderTexture: RenderTextureSystem;
+    batch: BatchSystem;
+
+    resolution: number;
+
     /**
      * Create renderer if WebGL is available. Overrideable
      * by the **@pixi/canvas-renderer** package to allow fallback.

@@ -18,6 +18,9 @@ const tempMatrix = new Matrix();
  */
 export class AbstractRenderer extends EventEmitter
 {
+    _backgroundColor: number;
+    _backgroundColorRgba: number[];
+
     /**
      * @param {string} system - The name of the system this renderer is for.
      * @param {object} [options] - The optional renderer parameters.

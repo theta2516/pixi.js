@@ -5,7 +5,7 @@ import { UniformGroup } from '../UniformGroup';
 // ud = uniformData
 // uv = uniformValue
 // l = location
-const GLSL_TO_SINGLE_SETTERS_CACHED = {
+const GLSL_TO_SINGLE_SETTERS_CACHED: any = {
 
     float: `
     if(cv !== v)
@@ -53,7 +53,7 @@ const GLSL_TO_SINGLE_SETTERS_CACHED = {
     sampler2DArray: 'gl.uniform1i(location, v)',
 };
 
-const GLSL_TO_ARRAY_SETTERS = {
+const GLSL_TO_ARRAY_SETTERS: any = {
 
     float:    `gl.uniform1fv(location, v)`,
 

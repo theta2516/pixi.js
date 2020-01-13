@@ -5,6 +5,9 @@ import { settings } from '@pixi/settings';
 import defaultVertex from './defaultFilter.vert';
 import defaultFragment from './defaultFilter.frag';
 
+import { FilterSystem } from './FilterSystem';
+import { RenderTexture } from '../renderTexture/RenderTexture';
+
 /**
  * Filter is a special type of WebGL shader that is applied to the screen.
  *
@@ -143,12 +146,18 @@ import defaultFragment from './defaultFilter.frag';
  */
 export class Filter extends Shader
 {
+    padding: number;
+    resolution: number;
+    enabled: boolean;
+    autoFit: boolean;
+    legacy: boolean;
+    state: State;
     /**
      * @param {string} [vertexSrc] - The source of the vertex shader.
      * @param {string} [fragmentSrc] - The source of the fragment shader.
      * @param {object} [uniforms] - Custom uniforms to use to augment the built-in ones.
      */
-    constructor(vertexSrc, fragmentSrc, uniforms)
+    constructor(vertexSrc?: string, fragmentSrc?: string, uniforms?: {[key:string]: any})
     {
         const program = Program.from(vertexSrc || Filter.defaultVertexSrc,
             fragmentSrc || Filter.defaultFragmentSrc);
@@ -212,7 +221,7 @@ export class Filter extends Shader
      *        There are some useful properties in the currentState :
      *        target, filters, sourceFrame, destinationFrame, renderTarget, resolution
      */
-    apply(filterManager, input, output, clear, currentState)
+    apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clear, currentState)
     {
         // do as you please!
 
@@ -260,14 +269,13 @@ export class Filter extends Shader
     {
         return defaultFragment;
     }
+
+    /**
+     * Used for caching shader IDs
+     *
+     * @static
+     * @type {object}
+     * @protected
+     */
+    static SOURCE_KEY_MAP: {[key: string]: string};
 }
-
-/**
- * Used for caching shader IDs
- *
- * @static
- * @type {object}
- * @protected
- */
-Filter.SOURCE_KEY_MAP = {};
-

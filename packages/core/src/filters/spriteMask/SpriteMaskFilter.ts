@@ -4,6 +4,14 @@ import vertex from './spriteMaskFilter.vert';
 import fragment from './spriteMaskFilter.frag';
 import { TextureMatrix } from '../../textures/TextureMatrix';
 
+import { IMaskTarget } from '../../mask/MaskData';
+import { Texture } from '../../textures/Texture';
+
+export interface ISpriteMaskTarget extends IMaskTarget
+{
+    texture: Texture;
+}
+
 /**
  * This handles a Sprite acting as a mask, as opposed to a Graphic.
  *
@@ -15,10 +23,12 @@ import { TextureMatrix } from '../../textures/TextureMatrix';
  */
 export class SpriteMaskFilter extends Filter
 {
+    maskSprite: IMaskTarget;
+    maskMatrix: Matrix;
     /**
      * @param {PIXI.Sprite} sprite - the target sprite
      */
-    constructor(sprite)
+    constructor(sprite: IMaskTarget)
     {
         const maskMatrix = new Matrix();
 
@@ -47,9 +57,9 @@ export class SpriteMaskFilter extends Filter
      * @param {PIXI.RenderTexture} output - The target to output to.
      * @param {boolean} clear - Should the output be cleared before rendering to it.
      */
-    apply(filterManager, input, output, clear)
+    apply(filterManager: FilterSystem, input: RenderTexture, output: RenderTexture, clear)
     {
-        const maskSprite = this.maskSprite;
+        const maskSprite = this.maskSprite as ISpriteMaskTarget;
         const tex = this.maskSprite.texture;
 
         if (!tex.valid)

@@ -6,6 +6,9 @@ import { Rectangle, Matrix } from '@pixi/math';
 import { UniformGroup } from '../shader/UniformGroup';
 import { DRAW_MODES } from '@pixi/constants';
 
+import { IFilterTarget } from './IFilterTarget';
+import { Filter } from './Filter';
+
 /**
  * System plugin to the renderer to manage filter states.
  *
@@ -173,7 +176,7 @@ export class FilterSystem extends System
      * @param {PIXI.DisplayObject} target - The target of the filter to render.
      * @param {PIXI.Filter[]} filters - The filters to apply.
      */
-    push(target, filters)
+    push(target: IFilterTarget, filters: Array<Filter>)
     {
         const renderer = this.renderer;
         const filterStack = this.defaultFilterStack;

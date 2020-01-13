@@ -38,6 +38,7 @@ export * from './shader/UniformGroup';
 export * from './mask/MaskData';
 export * from './filters/spriteMask/SpriteMaskFilter';
 export * from './filters/Filter';
+export * from './filters/IFilterTarget';
 export * from './geometry/Attribute';
 export * from './geometry/Buffer';
 export * from './geometry/Geometry';
